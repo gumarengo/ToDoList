@@ -1,71 +1,30 @@
+const numero = document.querySelector(".numero");
 const form = document.querySelector(".form");
-const tarefa = document.querySelector(".tarefa");
 const lista = document.querySelector(".listaTarefas");
 
 form.onsubmit = (e) => {
   e.preventDefault();
-  if (tarefa.value === "") return;
+  if (numero.value === "") return;
 
-  criaTarefa(tarefa.value);
+  console.log(numero, parseInt(numero.value));
+  fatorial(parseInt(numero.value));
 };
 
-function criaTarefa(tarefa) {
-  const li = criaLi();
-  li.innerText = tarefa;
-  lista.appendChild(li);
-  limpaInput();
-  botaoApagar(li);
-  salvarTarefas();
-}
+function fatorial(numero) {
+  let numFatorial = numero;
+  if (numFatorial === 0 || numFatorial === 1) {
+    limpaInput();
+    return (lista.innerHTML += `Fatorial = 1 <br />`);
+  }
 
-function criaLi() {
-  const li = document.createElement("li");
-  return li;
+  for (let i = numero - 1; i > 1; i--) {
+    numFatorial = numFatorial * i;
+  }
+  limpaInput();
+  return (lista.innerHTML += `${numero}! = ${numFatorial} <br />`);
 }
 
 function limpaInput() {
-  tarefa.value = "";
-  tarefa.focus();
+  numero.value = "";
+  numero.focus();
 }
-
-function botaoApagar(li) {
-  li.innerText += " ";
-  const botao = document.createElement("button");
-  botao.innerText = "Apagar";
-  botao.setAttribute("class", "apagar");
-  li.appendChild(botao);
-}
-
-document.addEventListener("click", function (e) {
-  const el = e.target;
-
-  if (el.classList.contains("apagar")) {
-    el.parentElement.remove();
-    salvarTarefas();
-  }
-});
-
-function salvarTarefas() {
-  const liTarefas = lista.querySelectorAll("li");
-  const listaDeTarefas = [];
-
-  for (let tarefa of liTarefas) {
-    let tarefaTexto = tarefa.innerText;
-    tarefaTexto = tarefaTexto.replace("Apagar", "").trim();
-    listaDeTarefas.push(tarefaTexto);
-  }
-
-  const tarefasJSON = JSON.stringify(listaDeTarefas);
-  localStorage.setItem("tarefas", tarefasJSON);
-  console.log(tarefasJSON);
-}
-
-function addTarefasSalvas() {
-  const tarefas = localStorage.getItem("tarefas");
-  const converteTarefas = JSON.parse(tarefas);
-
-  for (let tarefa of converteTarefas) {
-    criaTarefa(tarefa);
-  }
-}
-addTarefasSalvas();

@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css?family=Open+Sans:400,700&display=swap");
-
 :root {
-  --primary-color: rgb(204, 204, 204);
+  --primary-color: rgb(17, 86, 102);
+  --primary-color-darker: rgb(9, 48, 56);
 }
 
 * {
@@ -13,7 +13,7 @@ body {
   margin: 0;
   padding: 0;
   background: var(--primary-color);
-  font-family: "Open-Sans", sans-serif;
+  font-family: "Open sans", sans-serif;
   font-size: 1.3em;
   line-height: 1.5em;
 }
@@ -41,36 +41,20 @@ form input {
 }
 
 form input:focus {
-  outline: blue 1px solid;
+  outline: 1px solid var(--primary-color);
 }
 
 form button {
   border: none;
   background: var(--primary-color);
+  color: #fff;
   font-size: 18px;
   font-weight: 700;
   height: 50px;
   cursor: pointer;
-  transition: all ease 1s;
   margin-top: 30px;
 }
 
 form button:hover {
-  color: #fff;
-  background: #000;
-}
-
-.listaTarefas button {
-  margin-left: 60px;
-  border: none;
-  font-size: 14px;
-  font-weight: 400;
-  cursor: pointer;
-  background: var(--primary-color);
-  transition: all ease 0.5s;
-}
-
-.listaTarefas button:hover {
-  background: red;
-  color: #fff;
+  background: var(--primary-color-darker);
 }
